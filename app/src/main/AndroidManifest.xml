@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jingdl.welfarevideo">
 
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="26"/>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <!--Mandatory permissions to receive ads-->
     <uses-permission android:name="android.permission.INTERNET"/>

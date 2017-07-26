@@ -183,6 +183,8 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
+                SpotManager.getInstance(mContext).onDestroy();
+                SpotManager.getInstance(mContext).onAppExit();
                 finish();
                 System.exit(0);
             }
@@ -196,31 +198,20 @@ public class MainActivity extends Activity {
      * 设置插屏广告
      */
     private void setupSpotAd() {
-        // 竖图
         SpotManager.getInstance(mContext).setImageType(SpotManager.IMAGE_TYPE_VERTICAL);
-        // 高级动画
         SpotManager.getInstance(mContext).setAnimationType(SpotManager.ANIMATION_TYPE_ADVANCED);
-        // 展示插屏广告
         SpotManager.getInstance(mContext).showSpot(mContext, new SpotListener() {
+            @Override
+            public void onShowSuccess() {}
 
             @Override
-            public void onShowSuccess() {
-            }
+            public void onShowFailed(int errorCode) {}
 
             @Override
-            public void onShowFailed(int errorCode) {
-
-            }
+            public void onSpotClosed() {}
 
             @Override
-            public void onSpotClosed() {
-
-            }
-
-            @Override
-            public void onSpotClicked(boolean isWebPage) {
-
-            }
+            public void onSpotClicked(boolean isWebPage) {}
         });
     }
 
@@ -228,23 +219,19 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        // 插屏广告
         SpotManager.getInstance(mContext).onPause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        // 插屏广告
         SpotManager.getInstance(mContext).onStop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 插屏广告
         SpotManager.getInstance(mContext).onDestroy();
-        // 插屏广告（包括普通插屏广告、轮播插屏广告、原生插屏广告）
         SpotManager.getInstance(mContext).onAppExit();
     }
 }
